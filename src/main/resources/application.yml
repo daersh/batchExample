@@ -1,0 +1,28 @@
+spring:
+  batch:
+    #  스프링 부트 및 스프링 배치는 1 개의 배치 작업에
+    # 대하여 프로젝트 실행하면 자동으로 배치 작업이 가동되기 때문에 false 시켜야함
+    # 우리가 설정한 특정 날짜에 실행시키는게 목적이기 때문이다.
+    job:
+      enabled: false
+    jdbc:
+      #ddl auto 와 동일
+      initialize-schema: always
+      # 없어도 괜찮으나, 잘못된 쿼리 날라갈 수 있기 때문에 지정
+      schema: classpath:org/springframework/batch/core/schema-mariadb.sql
+
+  application:
+    name: batch_test
+
+  datasource-meta:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://localhost:3306/batch_meta
+    username: root
+    password: mariadb
+  datasource-data:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://localhost:3306/batch_data
+    username: root
+    password: mariadb
+server:
+  port: 8877
